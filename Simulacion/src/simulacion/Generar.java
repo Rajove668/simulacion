@@ -17,10 +17,8 @@ public class Generar {
             contador_sets++;
             numeros = set_numeros(n);
         } while (!todas_pruebas(numeros));
-        mensaje += "\n-------------------------------------------------------\n"
-                + "Luego de trabajar con " + contador_sets + " sets\n"
-                + "Tengo " + numeros.size() + " Numeros pseudo-aleatorios con"
-                + " distrubicion uniforme generados\n";
+        mensaje += "\n[GENERANDO FIN] " + contador_sets + " set/s despues, " + numeros.size()
+                + " Numeros pseudo-aleatorios con distrubicion uniforme confirmado";
         if (DEBUG) {
             System.out.println(mensaje);
         }
@@ -75,15 +73,14 @@ public class Generar {
     }
 
     public static boolean duplicados(ArrayList<Double> numeros_aleatorios) {
-        Set<Double> dupes = new HashSet<>(numeros_aleatorios);
-        return dupes.size() != numeros_aleatorios.size();
-//        for (Double numero : dupes) {
-//            if (Collections.frequency(numeros_aleatorios, numero) > 1) {
-//                System.out.println(numero + " - " + Collections.frequency(numeros_aleatorios, numero));
-//                //return true;
-//            }
-//        }
-//        return false;
+        Set<Double> set = new HashSet<>();
+        for (Double numero : numeros_aleatorios) {
+            if (set.add(numero) == false) {
+                System.out.println(numero);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
