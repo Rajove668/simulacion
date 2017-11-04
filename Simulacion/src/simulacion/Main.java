@@ -25,7 +25,7 @@ public class Main {
     public static ArrayList<Double> numeros_aleatorios;
     public static int N_ALEATORIOS = 100000;
 
-    public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+    public static void main(String[] args) {
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
         //Simulacion 5.8

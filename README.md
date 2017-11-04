@@ -17,6 +17,10 @@ https://www.cs.rit.edu/~ark/pj/doc/overview-summary.html
 https://github.com/cslarsen/mersenne-twister
 https://stackoverflow.com/questions/1640258/need-a-fast-random-generator-for-c
 
+## Calculos mas rapido
+
+http://commons.apache.org/proper/commons-math/javadocs/api-3.2/org/apache/commons/math3/stat/descriptive/SummaryStatistics.html
+
 ## Hallazgos
 
 Libreria por defecto
