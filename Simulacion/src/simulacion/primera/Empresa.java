@@ -26,7 +26,7 @@ public class Empresa {
         mensaje += "[SIM 5.6] " + this;
     }
 
-    public void simular(boolean debug2) {
+    public void simular() {
         tiempoInicio = System.nanoTime();
         int n_1 = 0;
         int n_2 = 0;
@@ -105,11 +105,11 @@ public class Empresa {
             }
         }
         tiempoEstimado = System.nanoTime() - tiempoInicio;
-        if (debug2) {
+        if (Util.DEBUG2) {
             System.out.println(mensaje);
 //            Costo total = n_1 * (100 + 1 * 200) + n_2 * (100 + 2 * 200) + n_3 * (100 + 3 * 200) + n_4 * (100 * 2 + 4 * 200);
         }
-        if (Util.DEBUG && debug2) {
+        if (Util.DEBUG && Util.DEBUG2) {
             System.out.println("\nSIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
                     + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }else if(Util.DEBUG){

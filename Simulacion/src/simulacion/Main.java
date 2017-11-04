@@ -36,7 +36,7 @@ public class Main {
         long nuevoTiempo = System.nanoTime();
         for (int j = 0; j < N_CORRIDAS_5_6; j++) {
             Empresa empresa = new Empresa(1);
-            empresa.simular(true);
+            empresa.simular();
             // Conteo del costo P1
             if (!costos_P1.containsKey(empresa.costo_total)) {
                 costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
@@ -44,7 +44,7 @@ public class Main {
                 costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
             }
             empresa = new Empresa(2);
-            empresa.simular(true);
+            empresa.simular();
             // Conteo del costo P2
             if (!costos_P2.containsKey(empresa.costo_total)) {
                 costos_P2.put(empresa.costo_total, Float.parseFloat("1"));

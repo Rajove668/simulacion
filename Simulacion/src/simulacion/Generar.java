@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import static simulacion.Util.DEBUG;
 
 public class Generar {
@@ -44,25 +45,25 @@ public class Generar {
     public static boolean todas_pruebas(ArrayList<Double> numeros) {
         int aciertos = 0;
         mensaje += "\n[PRUEBAS] Comenzando pruebas";
-        if (Pruebas.poker(numeros)) {
+        if (poker(numeros)) {
             mensaje += "\n[PRUEBAS] Poker OK";
             aciertos++;
         } else {
             mensaje += "\n[PRUEBAS] Poker FAIL";
         }
-        if (Pruebas.kolmogorov_smirnov(numeros)) {
+        if (kolmogorov_smirnov(numeros)) {
             mensaje += "\n[PRUEBAS] Kolmogorov Smirnov OK";
             aciertos++;
         } else {
             mensaje += "\n[PRUEBAS] Kolmogorov Smirnov FAIL";
         }
-        if (Pruebas.frecuencias_chi_cuadrado(numeros)) {
+        if (frecuencias_chi_cuadrado(numeros)) {
             mensaje += "\n[PRUEBAS] Frecuencias X^2 OK";
             aciertos++;
         } else {
             mensaje += "\n[PRUEBAS] Frecuencias X^2 FAIL";
         }
-        if (Pruebas.promedios(numeros)) {
+        if (promedios(numeros)) {
             mensaje += "\n[PRUEBAS] Promedios OK";
             aciertos++;
         } else {
@@ -81,6 +82,29 @@ public class Generar {
             }
         }
         return false;
+    }
+
+    static boolean poker(ArrayList<Double> numeros) {
+        return true;
+    }
+
+    static boolean kolmogorov_smirnov(ArrayList<Double> numeros) {
+        return true;
+    }
+
+    static boolean frecuencias_chi_cuadrado(ArrayList<Double> numeros) {
+        return true;
+    }
+
+    static boolean promedios(ArrayList<Double> numeros) {
+        SummaryStatistics ayuda = new SummaryStatistics();
+        numeros.forEach((numero) -> {
+            ayuda.addValue(numero);
+        });
+        if (Util.DEBUG2) {
+            mensaje += "\n[PRUEBAS] Promedios |Z| = " + (Math.abs((ayuda.getMean() - 0.5) * Math.sqrt(numeros.size())) / Math.sqrt(1.0 / 12.0)) + " < 1.96";
+        }
+        return Math.abs((ayuda.getMean() - 0.5) * Math.sqrt(numeros.size())) / Math.sqrt(1.0 / 12.0) < 1.96;
     }
 
 }
