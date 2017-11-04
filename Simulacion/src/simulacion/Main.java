@@ -28,44 +28,36 @@ public class Main {
         int N_ALEATORIOS = 100000;
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
-        Empresa empresa = new Empresa(1);
-        tiempoInicio = System.nanoTime();
-        empresa.simular();
-        System.out.println("P1 " + empresa.costo_total);
-        tiempoEstimado = System.nanoTime() - tiempoInicio;
-        System.out.println("Tiempo SET: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
-        System.out.println(100000-numeros_aleatorios.size());
-        //empresa = new Empresa(2);
-        //empresa.simular();
-//        System.out.println("P1 " + empresa.costo_total);
-//        //Simulacion 5.8
-//        int N_CORRIDAS_5_8 = 4;
-//        // Llevar registro de lo que sucede
-//        Map<Float, Float> costos_P1 = new HashMap<>();
-//        Map<Float, Float> costos_P2 = new HashMap<>();
-//        // Corridas
-//        for (int j = 0; j < N_CORRIDAS_5_8; j++) {
-//            // Politica 1
-//            Empresa empresa = new Empresa(1);
-//            empresa.simular();
-//            // Conteo del costo
-//            if (!costos_P1.containsKey(empresa.costo_total)) {
-//                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
-//            }
-//            System.gc();
-//            // Politica 2
-//            empresa = new Empresa(2);
-//            empresa.simular();
-//            // Conteo del costo
-//            if (!costos_P1.containsKey(empresa.costo_total)) {
-//                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
-//            }
-//            System.gc();
-//        }
+
+        //Simulacion 5.8
+        int N_CORRIDAS_5_8 = 4;
+        // Llevar registro de lo que sucede
+        Map<Float, Float> costos_P1 = new HashMap<>();
+        Map<Float, Float> costos_P2 = new HashMap<>();
+        long nuevoTiempo = System.nanoTime();
+        for(int j = 0; j< N_CORRIDAS_5_8; j++){
+            Empresa empresa = new Empresa(1);
+            empresa.simular(false);
+            // Conteo del costo P1
+            if (!costos_P1.containsKey(empresa.costo_total)) {
+                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
+            }
+            empresa = new Empresa(2);
+            empresa.simular(false);
+            // Conteo del costo P2
+            if (!costos_P2.containsKey(empresa.costo_total)) {
+                costos_P2.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P2.put(empresa.costo_total, costos_P2.get(empresa.costo_total) + 1);
+            }
+            System.gc();
+        }
+        long nuevoTiempo2 = System.nanoTime() - nuevoTiempo;
+        System.out.println("Tiempo: " + TimeUnit.NANOSECONDS.toMillis(nuevoTiempo2) + "ms");
+        System.out.println(costos_P1);
+        System.out.println(costos_P2);
 
         //Simulacion 5.12
     }
