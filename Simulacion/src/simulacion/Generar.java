@@ -68,7 +68,7 @@ public class Generar {
         } else {
             mensaje += "\n[PRUEBAS] Promedios FAIL";
         }
-        mensaje += "\n[PRUEBAS] Total " + aciertos + " de 4";
+        mensaje += "\n[PRUEBAS FIN] Total " + aciertos + " de 4";
         return aciertos >= 3;
     }
 
