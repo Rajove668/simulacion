@@ -110,9 +110,9 @@ public class Empresa {
 //            Costo total = n_1 * (100 + 1 * 200) + n_2 * (100 + 2 * 200) + n_3 * (100 + 3 * 200) + n_4 * (100 * 2 + 4 * 200);
         }
         if (Util.DEBUG && Util.DEBUG2) {
-            System.out.println("\nSIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
+            System.out.println("\n[SIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
                     + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
-        }else if(Util.DEBUG){
+        }else if(Util.DEBUG2){
             System.out.println("[SIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
                     + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }
