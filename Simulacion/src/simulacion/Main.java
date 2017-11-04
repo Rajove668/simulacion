@@ -25,9 +25,8 @@ public class Main {
     public static ArrayList<Double> numeros_aleatorios;
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
-        int N_ALEATORIOS = 10000000;
-        //numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
-        readFile1("numeros.txt");
+        int N_ALEATORIOS = 100000;
+        numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
         //Simulacion 5.8
         int N_CORRIDAS_5_8 = 4;
@@ -35,28 +34,28 @@ public class Main {
         Map<Float, Float> costos_P1 = new HashMap<>();
         Map<Float, Float> costos_P2 = new HashMap<>();
         // Corridas
-//        for (int j = 0; j < N_CORRIDAS_5_8; j++) {
-//            // Politica 1
-//            Empresa empresa = new Empresa("Politica 1");
-//            empresa.simular();
-//            // Conteo del costo
-//            if (!costos_P1.containsKey(empresa.costo_total)) {
-//                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
-//            }
-//            System.gc();
-//            // Politica 2
-//            empresa = new Empresa("Politica 2");
-//            empresa.simular();
-//            // Conteo del costo
-//            if (!costos_P1.containsKey(empresa.costo_total)) {
-//                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
-//            }
-//            System.gc();
-//        }
+        for (int j = 0; j < N_CORRIDAS_5_8; j++) {
+            // Politica 1
+            Empresa empresa = new Empresa(1);
+            empresa.simular();
+            // Conteo del costo
+            if (!costos_P1.containsKey(empresa.costo_total)) {
+                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
+            }
+            System.gc();
+            // Politica 2
+            empresa = new Empresa(2);
+            empresa.simular();
+            // Conteo del costo
+            if (!costos_P1.containsKey(empresa.costo_total)) {
+                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
+            }
+            System.gc();
+        }
 
         //Simulacion 5.12
     }
