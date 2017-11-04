@@ -26,17 +26,15 @@ public class Main {
     public static int N_ALEATORIOS = 100000;
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
-        
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
-
         //Simulacion 5.8
-        int N_CORRIDAS_5_8 = 1;
+        int N_CORRIDAS_5_6 = 1;
         // Llevar registro de lo que sucede
         Map<Float, Float> costos_P1 = new HashMap<>();
         Map<Float, Float> costos_P2 = new HashMap<>();
         long nuevoTiempo = System.nanoTime();
-        for(int j = 0; j< N_CORRIDAS_5_8; j++){
+        for (int j = 0; j < N_CORRIDAS_5_6; j++) {
             Empresa empresa = new Empresa(1);
             empresa.simular(true);
             // Conteo del costo P1

@@ -23,7 +23,7 @@ public class Empresa {
         componentes.add(nueva_hora());
         componentes.add(nueva_hora());
         componentes.add(nueva_hora());
-        mensaje += "[SIM 5.8] " + this;
+        mensaje += "[SIM 5.6] " + this;
     }
 
     public void simular(boolean debug2) {
@@ -39,7 +39,7 @@ public class Empresa {
             al final calcular el costo total CT = #_1*(100 + 1*200) + #_2*(100 + 2*200) + #_3*(100 + 3*200) + #_4*(100*2 + 4*200)
          */
         for (int hora = 1; hora <= 20000; hora++) {
-            mensaje += "\n[SIM 5.8] Hora(" + hora + ") ";
+            mensaje += "\n[SIM 5.6] Hora(" + hora + ") ";
             if (politica == 1) {
                 // POLITICA 1 Al dañarse, solo se cambia el dañado
                 // Consume 1 hora a todos
@@ -110,10 +110,10 @@ public class Empresa {
 //            Costo total = n_1 * (100 + 1 * 200) + n_2 * (100 + 2 * 200) + n_3 * (100 + 3 * 200) + n_4 * (100 * 2 + 4 * 200);
         }
         if (Util.DEBUG && debug2) {
-            System.out.println("\nSIM 5.8] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
+            System.out.println("\nSIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
                     + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }else if(Util.DEBUG){
-            System.out.println("[SIM 5.8] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
+            System.out.println("[SIM 5.6] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
                     + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }
     }
