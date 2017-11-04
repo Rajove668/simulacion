@@ -25,19 +25,28 @@ public class Main {
     public static ArrayList<Double> numeros_aleatorios;
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
-        int N_ALEATORIOS = 10000000;
-        //numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
-        readFile1("numeros.txt");
+        int N_ALEATORIOS = 100000;
+        numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
-        //Simulacion 5.8
-        int N_CORRIDAS_5_8 = 4;
-        // Llevar registro de lo que sucede
-        Map<Float, Float> costos_P1 = new HashMap<>();
-        Map<Float, Float> costos_P2 = new HashMap<>();
-        // Corridas
+        Empresa empresa = new Empresa(1);
+        tiempoInicio = System.nanoTime();
+        empresa.simular();
+        System.out.println("P1 " + empresa.costo_total);
+        tiempoEstimado = System.nanoTime() - tiempoInicio;
+        System.out.println("Tiempo SET: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
+        System.out.println(100000-numeros_aleatorios.size());
+        //empresa = new Empresa(2);
+        //empresa.simular();
+//        System.out.println("P1 " + empresa.costo_total);
+//        //Simulacion 5.8
+//        int N_CORRIDAS_5_8 = 4;
+//        // Llevar registro de lo que sucede
+//        Map<Float, Float> costos_P1 = new HashMap<>();
+//        Map<Float, Float> costos_P2 = new HashMap<>();
+//        // Corridas
 //        for (int j = 0; j < N_CORRIDAS_5_8; j++) {
 //            // Politica 1
-//            Empresa empresa = new Empresa("Politica 1");
+//            Empresa empresa = new Empresa(1);
 //            empresa.simular();
 //            // Conteo del costo
 //            if (!costos_P1.containsKey(empresa.costo_total)) {
@@ -47,7 +56,7 @@ public class Main {
 //            }
 //            System.gc();
 //            // Politica 2
-//            empresa = new Empresa("Politica 2");
+//            empresa = new Empresa(2);
 //            empresa.simular();
 //            // Conteo del costo
 //            if (!costos_P1.containsKey(empresa.costo_total)) {
