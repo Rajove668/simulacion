@@ -70,6 +70,7 @@ public class Generar {
             mensaje += "\n[PRUEBAS] Promedios FAIL";
         }
         mensaje += "\n[PRUEBAS FIN] Total " + aciertos + " de 4";
+        System.gc();
         return aciertos >= 3;
     }
 
@@ -93,7 +94,26 @@ public class Generar {
     }
 
     static boolean frecuencias_chi_cuadrado(ArrayList<Double> numeros) {
-        return true;
+        int[] conteo = new int[]{0, 0, 0, 0};
+        for (Double numero : numeros) {
+            if (numero < 0.25) {
+                conteo[0]++;
+            } else if (numero < 0.5) {
+                conteo[1]++;
+            } else if (numero < 0.75) {
+                conteo[2]++;
+            } else {
+                conteo[3]++;
+            }
+        }
+        float resultado = 0;
+        for (int i = 0; i < 4; i++) {
+            resultado += Math.pow(conteo[i] - numeros.size() / 4, 2) / (numeros.size() / 4);
+        }
+        if (Util.DEBUG2) {
+            mensaje += "\n[PRUEBAS] Frecuencias X^2  X = " + resultado + " < " + 9.49;
+        }
+        return resultado < 9.49;
     }
 
     static boolean promedios(ArrayList<Double> numeros) {
