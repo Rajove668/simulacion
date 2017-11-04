@@ -5,3 +5,4 @@ Simulacion/dist/
 Simulacion/nbdist/
 Simulacion/nbactions.xml
 Simulacion/nb-configuration.xml
+*.class
