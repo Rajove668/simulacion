@@ -37,7 +37,7 @@ public class Generar {
                 nuevo_set.add(r.nextDouble());
             }
         } while (duplicados(nuevo_set));
-        mensaje += "[GENERANDO] Luego de " + contador + " intentos se tienen numeros"
+        mensaje += "[DUPLICADOS] Luego de " + contador + " intentos se tienen numeros"
                 + " generados por random sin duplicados";
         return nuevo_set;
     }
