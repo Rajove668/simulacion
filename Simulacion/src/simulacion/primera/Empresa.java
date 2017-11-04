@@ -3,6 +3,7 @@ package simulacion.primera;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
+import simulacion.Main;
 import static simulacion.Main.numeros_aleatorios;
 import static simulacion.Main.tiempoEstimado;
 import static simulacion.Main.tiempoInicio;
@@ -41,45 +42,6 @@ public class Empresa {
             mensaje += "\n[SIM 5.8] Hora(" + hora + ") ";
             if (politica == 1) {
                 // POLITICA 1 Al dañarse, solo se cambia el dañado
-                if (hora == 1 && Collections.frequency(componentes, 0) != 0) {
-                    // Si viene al menos uno dañado
-                    // Detecta si se dañó uno
-                    if (Collections.frequency(componentes, 0) == 4) {
-                        mensaje += "Cambiando 4 Componentes";
-                        hora += 2;
-                        n_4 += 1;
-                        costo_total += 100 * 2 + 200 * 4;
-                        componentes.clear();
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                    } else if (Collections.frequency(componentes, 0) > 0) {
-                        mensaje += "Cambiando " + Collections.frequency(componentes, 0) + " Componentes";
-                        hora++;
-                        switch (Collections.frequency(componentes, 0)) {
-                            case 1:
-                                n_1 += 1;
-                                break;
-                            case 2:
-                                n_2 += 1;
-                                break;
-                            case 3:
-                                n_3 += 1;
-                                break;
-                        }
-                        costo_total += 100 + Collections.frequency(componentes, 0) * 200;
-                        //Suponiendo que desconectados, el tiempo de vida de los componentes no baja
-                        for (int k = 0; k < Collections.frequency(componentes, 0); k++) {
-                            componentes.add(nueva_hora());
-                        }
-                        componentes.removeIf(numero -> {
-                            return numero.equals(0);
-                        });
-                    } else {
-                        mensaje += this;
-                    }
-                }
                 // Consume 1 hora a todos
                 for (int j = 0; j < 4; j++) {
                     this.componentes.set(j, this.componentes.get(j) - 1);
@@ -122,23 +84,6 @@ public class Empresa {
                 }
             } else {
                 // POLITICA 2 Al dañarse, se cambian todos
-                if (hora == 1 && Collections.frequency(componentes, 0) != 0) {
-                    // Si viene al menos uno dañado
-                    // Detecta si se dañó uno
-                    if (Collections.frequency(componentes, 0) != 0) {
-                        mensaje += "Cambiando 4 Componentes";
-                        hora += 2;
-                        n_4 += 1;
-                        costo_total += 100 * 2 + 200 * 4;
-                        componentes.clear();
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                        componentes.add(nueva_hora());
-                    } else {
-                        mensaje += this;
-                    }
-                }
                 // Consume 1 hora a todos
                 for (int j = 0; j < 4; j++) {
                     this.componentes.set(j, this.componentes.get(j) - 1);
@@ -166,10 +111,10 @@ public class Empresa {
         }
         if (Util.DEBUG && debug2) {
             System.out.println("\nSIM 5.8] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
-                    + "ms y se han usado " + (100000 - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
+                    + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }else if(Util.DEBUG){
             System.out.println("[SIM 5.8] Politica " + this.politica + " Resumen: Tiempo " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado)
-                    + "ms y se han usado " + (100000 - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
+                    + "ms y se han usado " + (Main.N_ALEATORIOS - numeros_aleatorios.size()) + " numeros pseudo-aleatorios CT: " + this.costo_total);
         }
     }
 

@@ -23,21 +23,22 @@ public class Main {
     public static long tiempoInicio;
     public static long tiempoEstimado;
     public static ArrayList<Double> numeros_aleatorios;
+    public static int N_ALEATORIOS = 100000;
 
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
-        int N_ALEATORIOS = 100000;
+        
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
 
         //Simulacion 5.8
-        int N_CORRIDAS_5_8 = 4;
+        int N_CORRIDAS_5_8 = 1;
         // Llevar registro de lo que sucede
         Map<Float, Float> costos_P1 = new HashMap<>();
         Map<Float, Float> costos_P2 = new HashMap<>();
         long nuevoTiempo = System.nanoTime();
         for(int j = 0; j< N_CORRIDAS_5_8; j++){
             Empresa empresa = new Empresa(1);
-            empresa.simular(false);
+            empresa.simular(true);
             // Conteo del costo P1
             if (!costos_P1.containsKey(empresa.costo_total)) {
                 costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
@@ -45,7 +46,7 @@ public class Main {
                 costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
             }
             empresa = new Empresa(2);
-            empresa.simular(false);
+            empresa.simular(true);
             // Conteo del costo P2
             if (!costos_P2.containsKey(empresa.costo_total)) {
                 costos_P2.put(empresa.costo_total, Float.parseFloat("1"));

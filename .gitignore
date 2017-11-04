@@ -1,8 +1,8 @@
-Simulacion/nbproject/private/
-Simulacion/build/
-Simulacion/nbbuild/
-Simulacion/dist/
-Simulacion/nbdist/
+Simulacion/nbproject/private/*
+Simulacion/build/*
+Simulacion/nbbuild/*
+Simulacion/dist/*
+Simulacion/nbdist/*
 Simulacion/nbactions.xml
 Simulacion/nb-configuration.xml
 *.class
