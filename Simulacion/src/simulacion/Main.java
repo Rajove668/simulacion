@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.Generar.duplicados;
 import simulacion.primera.Empresa;
+import simulacion.segunda.Sistema;
 
 public class Main {
 
@@ -59,6 +60,7 @@ public class Main {
         System.out.println(costos_P2);
 
         //Simulacion 5.12
+        Sistema sistema = new Sistema();
     }
 
     public static Double un_numero_aleatorio() {
