@@ -122,8 +122,8 @@ public class Empresa {
         for (int i = 0; i < 12; i++) {
             sum += un_numero_aleatorio();
         }
-        // Es posible redondear para abajo
-        return Math.round((float) (MEDIA + DESVIACION_ESTANDAR * (sum - 6)));
+        // Redondea abajo
+        return (int) Math.floor(MEDIA + DESVIACION_ESTANDAR * (sum - 6));
     }
 
     @Override
