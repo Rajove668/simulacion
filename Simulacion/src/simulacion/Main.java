@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simulacion.Generar.duplicados;
 import simulacion.primera.Empresa;
+import simulacion.segunda.Cliente;
 import simulacion.segunda.Sistema;
 
 public class Main {
@@ -61,7 +62,10 @@ public class Main {
 
         //Simulacion 5.12
         Sistema sistema = new Sistema();
-        sistema.simular(5);
+        sistema.simular(3);
+//        sistema.fila1.insertar(new Cliente(15.0, 20.0, 1));
+//        sistema.fila1.insertar(new Cliente(10.0, 15.0, 1));
+        
         System.out.println(sistema);
         System.out.println(sistema.atendidos);
      }

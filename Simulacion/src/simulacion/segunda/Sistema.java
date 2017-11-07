@@ -1,6 +1,7 @@
 package simulacion.segunda;
 
 import java.util.ArrayList;
+import java.util.Random;
 import static simulacion.Main.un_numero_aleatorio;
 
 public class Sistema {
@@ -22,16 +23,12 @@ public class Sistema {
             2. Se atienden hasta consumir la hora y se van añadiendo a la segunda fila
             3. Se atienden hasta consumir la hora la segunda fila
          */
-        for (int hora = 1; hora <= horas; hora++) {
+        for (int hora = 0; hora < horas; hora++) {
             System.out.println("HORA " + hora);
             // Valores de prueba
             for (int i = 0; i < 5; i++) {
-                fila1.insertar(new Cliente(15.0, 16.0));
+                fila1.insertar(new Cliente(14.0, 16.0, hora));
             }
-            // Valores reales
-//            for (int i = 0; i < clientes_nuevos(); i++) {
-//                fila1.insertar(new Cliente(tiempo_atencion(), tiempo_atencion2()));
-//            }
             System.out.println("F1 " + fila1);
             System.out.println("atendiendo");
             // FILA 1
@@ -67,12 +64,43 @@ public class Sistema {
             // FIN FILA 1
             System.out.println("F1 " + fila1);
             System.out.println("F2 " + fila2);
-            System.out.println("atendiendo");
             // FILA 2
-            if (!fila2.vacio()) {
-                // PROGRAMAR AQUI
+            while (!fila2.vacio()) {
+                if ((fila2.cliente_atendiendo().tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2) <= (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0) {
+                    // Atiende completamente
+                    System.out.println("ATENDIENDO COMPLETAMENTE " + fila2.cliente_atendiendo());
+                    System.out.println("POR " + (fila2.cliente_atendiendo().tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2) + " < " + (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0);
+                    for (int i = 1; i < fila2.size(); i++) {
+                        if (fila2.lista.get(i).tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2 <= (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0) {
+                            fila2.lista.get(i).tiempoTotal += fila2.cliente_atendiendo().tiempoAtencion2;
+                        } else {
+                            fila2.lista.get(i).tiempoTotal = (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0;
+                        }
+                    }
+                    fila2.cliente_atendiendo().tiempoTotal += fila2.cliente_atendiendo().tiempoAtencion2;
+                    fila2.cliente_atendiendo().tiempoAtencion2 = 0.0;
+                    atendidos.add(fila2.remover_cliente_atendido());
+                } else if (fila2.cliente_atendiendo().tiempoTotal != (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0) {
+                    // Atiende parcialmente
+                    System.out.println("ATENDIENDO PARCIALMENTE " + fila2.cliente_atendiendo());
+                    System.out.println("POR " + fila2.cliente_atendiendo().tiempoTotal + " != " + (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0);
+                    fila2.cliente_atendiendo().tiempoAtencion2 -= (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0 - fila2.cliente_atendiendo().tiempoTotal;
+                    fila2.cliente_atendiendo().tiempoTotal = (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0;
+                    for (int i = 1; i < fila2.size(); i++) {
+                        if (fila2.lista.get(i).tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2 <= (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0) {
+                            fila2.lista.get(i).tiempoTotal += fila2.cliente_atendiendo().tiempoAtencion2;
+                        } else {
+                            fila2.lista.get(i).tiempoTotal = (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0;
+                        }
+                    }
+                    break;
+                }else{
+                    break;
+                }
             }
-            System.out.println("FIN HORA " + hora);
+            System.out.println("QUEDA");
+            System.out.println(this);
+            System.out.println("FIN HORA " + hora + " atendidos " + atendidos);
             System.out.println("");
         }
     }
