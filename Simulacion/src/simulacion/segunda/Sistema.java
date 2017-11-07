@@ -69,7 +69,7 @@ public class Sistema {
                 if ((fila2.cliente_atendiendo().tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2) <= (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0) {
                     // Atiende completamente
                     System.out.println("ATENDIENDO COMPLETAMENTE " + fila2.cliente_atendiendo());
-                    System.out.println("POR " + (fila2.cliente_atendiendo().tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2) + " < " + (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0);
+                    System.out.println("POR " + (fila2.cliente_atendiendo().tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2) + " <= " + (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0);
                     for (int i = 1; i < fila2.size(); i++) {
                         if (fila2.lista.get(i).tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2 <= (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0) {
                             fila2.lista.get(i).tiempoTotal += fila2.cliente_atendiendo().tiempoAtencion2;
