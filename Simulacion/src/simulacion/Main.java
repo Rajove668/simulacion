@@ -61,17 +61,7 @@ public class Main {
 
         //Simulacion 5.12
         Sistema sistema = new Sistema();
-        
-        System.out.println(sistema);
-        sistema.simular();
-        System.out.println(sistema);
-        System.out.println(sistema.atendidos);
-        System.out.println("");
-        sistema.simular();
-        System.out.println(sistema);
-        System.out.println(sistema.atendidos);
-        System.out.println("");
-        sistema.simular();
+        sistema.simular(5);
         System.out.println(sistema);
         System.out.println(sistema.atendidos);
      }
