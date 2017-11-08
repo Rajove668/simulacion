@@ -63,6 +63,5 @@ T promedio en sistema 48.11248945584497 min
 
 ## TO DO
 
-- [ ] Mas interaccion del usuario (Corridas y DEBUG)
-- [ ] Hacer simulaciones y poner resultados en README (En especial 5.6 por redondeo)
 - [ ] Presentacion
+- [ ] Prueba de poker

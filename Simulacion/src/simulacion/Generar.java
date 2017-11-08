@@ -1,6 +1,7 @@
 package simulacion;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -90,7 +91,24 @@ public class Generar {
     }
 
     static boolean kolmogorov_smirnov(ArrayList<Double> numeros) {
-        return true;
+        Double D_max, d, D_max_aux;
+        ArrayList<Double> numeros_aux = new ArrayList<>(numeros);
+        Collections.sort(numeros_aux);
+        // Primer maximo
+        D_max = Math.abs((1.0 / numeros_aux.size()) - numeros_aux.get(0));
+        for (int i = 0; i < numeros_aux.size(); i++) {
+            D_max_aux = Math.abs((i + 1.0) / numeros_aux.size() - numeros_aux.get(i));
+//            System.out.println("F[" + (i + 1) + "]: " + (i + 1.0) / numeros_aux.size() + " D[" + (i + 1) + "]: " + D_max_aux);
+            if (D_max_aux > D_max) {
+                D_max = D_max_aux;
+            }
+        }
+        //Para una significacia de 5%
+        d = 1.36 / Math.sqrt(numeros.size());
+        if(Util.DEBUG2){
+            mensaje += "\n[PRUEBAS] Kolmogorov Smirnov D = " + D_max + " < " + d;
+        }
+        return D_max < d;
     }
 
     static boolean frecuencias_chi_cuadrado(ArrayList<Double> numeros) {
