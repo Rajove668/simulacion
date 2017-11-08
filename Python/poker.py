@@ -1,6 +1,8 @@
 # numeros = ["0.00000", "0.18750", "0.12500", "0.81250", "0.25000", "0.43750", "0.37500", "0.06250", "0.50000", "0.68750",
 #            "0.62500", "0.31250", "0.75000", "0.93750", "0.87500", "0.56250"]
-
+import random
+# Crea 100 numeros con 5 digitos como string
+numeros = [str(random.uniform(0, 1))[0:7] for i in range(100)]
 
 def poker(numeros, debug=True):
     probabilidad = {'td': 0.30240, '1p': 0.50400, '2p': 0.10800, 'tercia': 0.07200, 'full': 0.00900, 'poker': 0.00450,
@@ -146,9 +148,11 @@ def poker(numeros, debug=True):
     for indice in fe.keys():
         suma += ((fo[indice] - fe[indice]) ** 2) / fe[indice]
     print(suma)
-    if suma < 9.4877:
+    if suma < 7.81:
         print("No se rechaza que los numeros siguen una distribucion uniforme")
         return True
     else:
         print("Se rechaza que los numeros siguen una distribucion uniforme")
         return False
+
+poker(numeros, True)
