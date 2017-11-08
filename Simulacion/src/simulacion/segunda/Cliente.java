@@ -23,7 +23,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "#" + id + "[" + horaEntrada + "](" + tiempoTotal + ", " + tiempoAtencion1 + ", " + tiempoAtencion2 + ')';
+        return "#" + id + "[" + (horaEntrada + 1) + "](" + tiempoTotal + ", " + tiempoAtencion1 + ", " + tiempoAtencion2 + ')';
     }
-
+   
 }
