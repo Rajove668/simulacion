@@ -9,7 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +34,7 @@ public class Main {
         Util.DEBUG = true;
         Util.DEBUG2 = true;
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
+        writeFile();
         System.gc();
         int N_CORRIDAS_5_6 = 10;
         int N_CORRIDAS_5_12 = 10;
@@ -121,6 +124,7 @@ public class Main {
         if (numeros_aleatorios.isEmpty()) {
             N_ALEATORIOS += 100000;
             numeros_aleatorios = Generar.numeros(100000);
+            writeFile();
             System.gc();
             return numeros_aleatorios.remove(0);
         } else {
@@ -207,7 +211,8 @@ public class Main {
         }
     }
 
-    private static void writeFile(String archivo) {
+    private static void writeFile() {
+        String archivo = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date());
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(archivo))) {
             for (Double numero : numeros_aleatorios) {
                 pw.println(numero);

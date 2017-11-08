@@ -305,6 +305,15 @@ public class Generar {
     }
 
     private static boolean todos_diferentes(String numero) {
+        // Conteo
+        Map<Character, Integer> guia = new HashMap<>();
+        for (char digito : numero.toCharArray()) {
+            if (guia.containsKey(digito)) {
+                return false;
+            } else {
+                guia.put(digito, 1);
+            }
+        }
         return true;
     }
 
