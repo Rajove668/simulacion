@@ -38,3 +38,11 @@ RECUERDA VOLVER A SIMULAR PORQUE AHORA EL TIMPO DE VIDA ES REDONDEADO HACIA ABAJ
 Tiempo: 394950ms
 P1 38300.0=2.0, 38700.0=1.0, 39000.0=4.0, 39300.0=1.0, 39600.0=1.0, 39900.0=1.0}
 P2 {41000.0=2.0, 38000.0=2.0, 42000.0=1.0, 39000.0=3.0, 40000.0=2.0}
+
+## Sim 5.12
+
+Tiempo max = (hora - cliente.horaEntrada + 1) * 60
+
+## To do
+
+Falta simular con valores aleatorios y hacer las dos pruebas que faltan
