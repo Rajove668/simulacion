@@ -86,10 +86,6 @@ public class Generar {
         return false;
     }
 
-    static boolean poker(ArrayList<Double> numeros) {
-        return true;
-    }
-
     static boolean kolmogorov_smirnov(ArrayList<Double> numeros) {
         Double D_max, d, D_max_aux;
         ArrayList<Double> numeros_aux = new ArrayList<>(numeros);
@@ -105,7 +101,7 @@ public class Generar {
         }
         //Para una significacia de 5%
         d = 1.36 / Math.sqrt(numeros.size());
-        if(Util.DEBUG2){
+        if (Util.DEBUG2) {
             mensaje += "\n[PRUEBAS] Kolmogorov Smirnov D = " + D_max + " < " + d;
         }
         return D_max < d;
@@ -143,6 +139,10 @@ public class Generar {
             mensaje += "\n[PRUEBAS] Promedios |Z| = " + (Math.abs((ayuda.getMean() - 0.5) * Math.sqrt(numeros.size())) / Math.sqrt(1.0 / 12.0)) + " < 1.96";
         }
         return Math.abs((ayuda.getMean() - 0.5) * Math.sqrt(numeros.size())) / Math.sqrt(1.0 / 12.0) < 1.96;
+    }
+
+    static boolean poker(ArrayList<Double> numeros) {
+        return true;
     }
 
 }
