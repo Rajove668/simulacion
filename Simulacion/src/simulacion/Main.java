@@ -30,7 +30,7 @@ public class Main {
     public static void main(String[] args) {
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
-        int N_CORRIDAS_5_6 = 2;
+        int N_CORRIDAS_5_6 = 10;
         int N_CORRIDAS_5_12 = 10;
         int N_HORAS_5_12 = 24;
         if(JOptionPane.showConfirmDialog(null, "Ingresar valores?") == JOptionPane.YES_OPTION){
