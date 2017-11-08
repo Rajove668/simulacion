@@ -212,7 +212,7 @@ public class Main {
     }
 
     private static void writeFile() {
-        String archivo = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date());
+        String archivo = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".txt";
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(archivo))) {
             for (Double numero : numeros_aleatorios) {
                 pw.println(numero);
