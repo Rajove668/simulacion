@@ -28,23 +28,34 @@ public class Main {
     public static int N_ALEATORIOS = 100000;
 
     public static void main(String[] args) {
+        // Pedir al usuario que tanto debug quiere
+        Util.DEBUG = true;
+        Util.DEBUG2 = true;
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
         int N_CORRIDAS_5_6 = 10;
         int N_CORRIDAS_5_12 = 10;
         int N_HORAS_5_12 = 24;
-        if(JOptionPane.showConfirmDialog(null, "Ingresar valores?") == JOptionPane.YES_OPTION){
+        // Entrada 1
+        JOptionPane.showMessageDialog(null, "Valores predeterminados\nSIM 5.6 -> "
+                + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
+                + " con " + N_HORAS_5_12 + " horas por corrida");
+        if (JOptionPane.showConfirmDialog(null, "Cambiar numero de corridas predeterminadas?") == JOptionPane.YES_OPTION) {
             // Pedir al usuario
             N_CORRIDAS_5_6 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.6?"));
             N_CORRIDAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.12?"));
             N_HORAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas horas para cada corrida de SIM 5.12?"));
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Usando valores predeterminados\nSIM 5.6 -> "
                     + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
                     + " con " + N_HORAS_5_12 + " horas por corrida");
         }
-        // Pedir al usuario que tanto debug quiere
-        
+        // Entrada 2
+        JOptionPane.showMessageDialog(null, "Valores predeterminados\nResumen de cada corrida: " + Util.DEBUG + "\nPaso a paso de cada corrida: " + Util.DEBUG2);
+        if (JOptionPane.showConfirmDialog(null, "Desea cambiar que tan descriptiva es la salida?") == JOptionPane.YES_OPTION) {
+            Util.DEBUG = (JOptionPane.showConfirmDialog(null, "Resumen de cada corrida", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+            Util.DEBUG2 = (JOptionPane.showConfirmDialog(null, "Paso a paso de cada corrida", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+        }
         //Simulacion 5.8
         // Llevar registro de lo que sucede
         Map<Float, Float> costos_P1 = new HashMap<>();
