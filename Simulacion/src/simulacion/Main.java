@@ -35,6 +35,9 @@ public class Main {
         int N_HORAS_5_12 = 24;
         if(JOptionPane.showConfirmDialog(null, "Ingresar valores?") == JOptionPane.YES_OPTION){
             // Pedir al usuario
+            N_CORRIDAS_5_6 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.6?"));
+            N_CORRIDAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.12?"));
+            N_HORAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas horas para cada corrida de SIM 5.12?"));
         }else{
             JOptionPane.showMessageDialog(null, "Usando valores predeterminados\nSIM 5.6 -> "
                     + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
