@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import static simulacion.Generar.duplicados;
 import simulacion.primera.Empresa;
 import simulacion.segunda.Sistema;
@@ -29,42 +30,78 @@ public class Main {
     public static void main(String[] args) {
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
         System.gc();
+        int N_CORRIDAS_5_6 = 2;
+        int N_CORRIDAS_5_12 = 10;
+        int N_HORAS_5_12 = 24;
+        if(JOptionPane.showConfirmDialog(null, "Ingresar valores?") == JOptionPane.YES_OPTION){
+            // Pedir al usuario
+        }else{
+            JOptionPane.showMessageDialog(null, "Usando valores predeterminados\nSIM 5.6 -> "
+                    + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
+                    + " con " + N_HORAS_5_12 + " horas por corrida");
+        }
+        // Pedir al usuario que tanto debug quiere
+        
         //Simulacion 5.8
-//        int N_CORRIDAS_5_6 = 1;
-//        // Llevar registro de lo que sucede
-//        Map<Float, Float> costos_P1 = new HashMap<>();
-//        Map<Float, Float> costos_P2 = new HashMap<>();
-//        long nuevoTiempo = System.nanoTime();
-//        for (int j = 0; j < N_CORRIDAS_5_6; j++) {
-//            Empresa empresa = new Empresa(1);
-//            empresa.simular();
-//            // Conteo del costo P1
-//            if (!costos_P1.containsKey(empresa.costo_total)) {
-//                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
-//            }
-//            empresa = new Empresa(2);
-//            empresa.simular();
-//            // Conteo del costo P2
-//            if (!costos_P2.containsKey(empresa.costo_total)) {
-//                costos_P2.put(empresa.costo_total, Float.parseFloat("1"));
-//            } else {
-//                costos_P2.put(empresa.costo_total, costos_P2.get(empresa.costo_total) + 1);
-//            }
-//            System.gc();
-//        }
-//        long nuevoTiempo2 = System.nanoTime() - nuevoTiempo;
-//        System.out.println("Tiempo: " + TimeUnit.NANOSECONDS.toMillis(nuevoTiempo2) + "ms");
-//        System.out.println(costos_P1);
-//        System.out.println(costos_P2);
+        // Llevar registro de lo que sucede
+        Map<Float, Float> costos_P1 = new HashMap<>();
+        Map<Float, Float> costos_P2 = new HashMap<>();
+        long nuevoTiempo = System.nanoTime();
+        for (int j = 0; j < N_CORRIDAS_5_6; j++) {
+            Empresa empresa = new Empresa(1);
+            empresa.simular();
+            // Conteo del costo P1
+            if (!costos_P1.containsKey(empresa.costo_total)) {
+                costos_P1.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P1.put(empresa.costo_total, costos_P1.get(empresa.costo_total) + 1);
+            }
+            empresa = new Empresa(2);
+            empresa.simular();
+            // Conteo del costo P2
+            if (!costos_P2.containsKey(empresa.costo_total)) {
+                costos_P2.put(empresa.costo_total, Float.parseFloat("1"));
+            } else {
+                costos_P2.put(empresa.costo_total, costos_P2.get(empresa.costo_total) + 1);
+            }
+            System.gc();
+        }
+        long nuevoTiempo2 = System.nanoTime() - nuevoTiempo;
+        System.out.println("[SIM 5.6 FIN] Tiempo: " + TimeUnit.NANOSECONDS.toMillis(nuevoTiempo2) + "ms");
+        System.out.println(costos_P1);
+        System.out.println(costos_P2);
 
         //Simulacion 5.12
-        Sistema sistema = new Sistema();
-        sistema.simular(5);
-        System.out.println(sistema);
-        System.out.println(sistema.atendidos);
-     }
+        // Llevar registro de lo que sucede
+        Map<Integer, Float> fila1_tamaños = new HashMap<>();
+        Map<Integer, Float> fila2_tamaños = new HashMap<>();
+        Double promedio = 0.0;
+        nuevoTiempo = System.nanoTime();
+        for (int j = 0; j < N_CORRIDAS_5_12; j++) {
+            Sistema sistema = new Sistema();
+            sistema.simular(N_HORAS_5_12);
+            // Saca resultados F1
+            if (!fila1_tamaños.containsKey(sistema.fila1.size())) {
+                fila1_tamaños.put(sistema.fila1.size(), Float.parseFloat("1.0"));
+            } else {
+                fila1_tamaños.put(sistema.fila1.size(), fila1_tamaños.get(sistema.fila1.size()) + 1);
+            }
+            // Saca resultados F2
+            if (!fila2_tamaños.containsKey(sistema.fila2.size())) {
+                fila2_tamaños.put(sistema.fila2.size(), Float.parseFloat("1.0"));
+            } else {
+                fila2_tamaños.put(sistema.fila2.size(), fila2_tamaños.get(sistema.fila2.size()) + 1);
+            }
+            // Saca resultados tiempo promedio
+            promedio += sistema.tiempoPromedio();
+        }
+        promedio /= N_CORRIDAS_5_12;
+        nuevoTiempo2 = System.nanoTime() - nuevoTiempo;
+        System.out.println("[SIM 5.12 FIN] Tiempo: " + TimeUnit.NANOSECONDS.toMillis(nuevoTiempo2) + "ms");
+        System.out.println("F1 " + fila1_tamaños);
+        System.out.println("F2 " + fila2_tamaños);
+        System.out.println("T promedio en sistema " + promedio + " min");
+    }
 
     public static Double un_numero_aleatorio() {
         if (numeros_aleatorios.isEmpty()) {
@@ -122,13 +159,13 @@ public class Main {
     }
 
     public static void pruebas() {
-        int N_ALEATORIOS = 10000000;
-        ArrayList<Double> numeros_aleatorios;
+        int N_ALEATORIOS_2 = 10000000;
+        ArrayList<Double> numeros_aleatorios2;
         tiempoInicio = System.nanoTime();
         System.out.println("OTRA LIBRERIA");
-        numeros_aleatorios = otra_libreria(N_ALEATORIOS);
+        numeros_aleatorios2 = otra_libreria(N_ALEATORIOS_2);
         System.out.println("JAVA");
-        numeros_aleatorios = java(N_ALEATORIOS);
+        numeros_aleatorios2 = java(N_ALEATORIOS_2);
         System.gc();
         System.out.println("Tiempo total: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
     }

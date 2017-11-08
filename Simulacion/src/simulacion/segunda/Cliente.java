@@ -1,7 +1,7 @@
 package simulacion.segunda;
 
 public class Cliente {
-
+    public Integer horaEntrada;
     public Integer id;
     public static int ID = 1;
     public Double tiempoTotal;
@@ -10,7 +10,7 @@ public class Cliente {
     public Double tiempoAtencion1_bak;
     public Double tiempoAtencion2_bak;
 
-    public Cliente(Double tiempoAtencion1, Double tiempoAtencion2) {
+    public Cliente(Double tiempoAtencion1, Double tiempoAtencion2, Integer hora) {
         this.tiempoAtencion1 = tiempoAtencion1;
         this.tiempoAtencion1_bak = tiempoAtencion1;
         this.tiempoAtencion2 = tiempoAtencion2;
@@ -18,11 +18,12 @@ public class Cliente {
         this.tiempoTotal = 0.0;
         this.id = Cliente.ID;
         Cliente.ID++;
+        this.horaEntrada = hora;
     }
 
     @Override
     public String toString() {
-        return "#" + id + "(" + tiempoTotal + ", " + tiempoAtencion1 + ", " + tiempoAtencion2 + ')';
+        return "#" + id + "[" + (horaEntrada + 1) + "](" + tiempoTotal + ", " + tiempoAtencion1 + ", " + tiempoAtencion2 + ')';
     }
-
+   
 }
