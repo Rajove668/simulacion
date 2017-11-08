@@ -40,7 +40,7 @@ public class Main {
         JOptionPane.showMessageDialog(null, "Valores predeterminados\nSIM 5.6 -> "
                 + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
                 + " con " + N_HORAS_5_12 + " horas por corrida");
-        if (JOptionPane.showConfirmDialog(null, "Cambiar numero de corridas predeterminadas?") == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Cambiar numero de corridas?") == JOptionPane.YES_OPTION) {
             // Pedir al usuario
             N_CORRIDAS_5_6 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.6?"));
             N_CORRIDAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.12?"));
@@ -119,7 +119,8 @@ public class Main {
 
     public static Double un_numero_aleatorio() {
         if (numeros_aleatorios.isEmpty()) {
-            numeros_aleatorios = Generar.numeros(1000000);
+            N_ALEATORIOS += 100000;
+            numeros_aleatorios = Generar.numeros(100000);
             System.gc();
             return numeros_aleatorios.remove(0);
         } else {

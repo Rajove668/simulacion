@@ -64,4 +64,3 @@ T promedio en sistema 48.11248945584497 min
 ## TO DO
 
 - [ ] Presentacion
-- [ ] Prueba de poker
