@@ -136,6 +136,7 @@ public class Sistema {
     }
 
     public Integer clientes_nuevos() {
+        // TI Dist poisson
         int MEDIA = 20;
         if (this.fPoisson == null) {
             Double[] f = new Double[3 * MEDIA + 1];
@@ -175,6 +176,7 @@ public class Sistema {
     }
 
     public Double tiempo_atencion() {
+        // TI Dist exponencial
         double MEDIA = 2.0;
         Double R = un_numero_aleatorio();
         if (R.equals(0.0)) {
@@ -185,6 +187,7 @@ public class Sistema {
     }
 
     public Double tiempo_atencion2() {
+        // TI Dist uniforme
         int A = 1;
         int B = 2;
         return Math.ceil(A + (B - A) * un_numero_aleatorio());

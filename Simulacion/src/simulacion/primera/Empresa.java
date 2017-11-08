@@ -116,6 +116,7 @@ public class Empresa {
     }
 
     private Integer nueva_hora() {
+        // Procedimientos especiales Dist. normal
         Integer MEDIA = 600;
         Integer DESVIACION_ESTANDAR = 100;
         Double sum = 0.0;
