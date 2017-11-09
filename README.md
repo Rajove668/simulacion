@@ -73,7 +73,7 @@ static boolean duplicados(ArrayList<Double> numeros_aleatorios) {
 {41000.0=4.0, 40000.0=6.0}
 ```
 
-![5-6][10_Corridas_5_6.jpg]
+![5-6](10_Corridas_5_6.jpg)
 
 ## Resultados 5.12
 
@@ -86,7 +86,7 @@ F2 {1=1.0, 2=1.0, 4=1.0, 5=2.0, 6=2.0, 7=2.0, 10=1.0}
 T promedio en sistema 49.61755134513993 min
 ```
 
-![5-12][10_Corridas_5_12.jpg]
+![5-12](10_Corridas_5_12.jpg)
 
 ## TO DO
 
