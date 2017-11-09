@@ -27,7 +27,7 @@ public class Main {
     public static long tiempoInicio;
     public static long tiempoEstimado;
     public static ArrayList<Double> numeros_aleatorios;
-    public static int N_ALEATORIOS = 10000;
+    public static int N_ALEATORIOS = 100000;
 
     public static void main(String[] args) {
         // Pedir al usuario que tanto debug quiere
