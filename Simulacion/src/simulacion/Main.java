@@ -27,37 +27,34 @@ public class Main {
     public static long tiempoInicio;
     public static long tiempoEstimado;
     public static ArrayList<Double> numeros_aleatorios;
-    public static int N_ALEATORIOS = 100000;
+    public static int N_ALEATORIOS = 10000;
 
     public static void main(String[] args) {
         // Pedir al usuario que tanto debug quiere
         Util.DEBUG = true;
         Util.DEBUG2 = true;
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
-        writeFile();
+        writeFile(N_ALEATORIOS);
         System.gc();
         int N_CORRIDAS_5_6 = 10;
         int N_CORRIDAS_5_12 = 10;
         int N_HORAS_5_12 = 24;
         // Entrada 1
-        JOptionPane.showMessageDialog(null, "Valores predeterminados\nSIM 5.6 -> "
+        if (JOptionPane.showConfirmDialog(null, "Valores predeterminados\nSIM 5.6 -> "
                 + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
-                + " con " + N_HORAS_5_12 + " horas por corrida");
-        if (JOptionPane.showConfirmDialog(null, "Cambiar numero de corridas?") == JOptionPane.YES_OPTION) {
+                + " con " + N_HORAS_5_12 + " horas por corrida\nCambiar numero de corridas?", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // Pedir al usuario
             N_CORRIDAS_5_6 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.6?"));
             N_CORRIDAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas corridas para SIM 5.12?"));
             N_HORAS_5_12 = Integer.parseInt(JOptionPane.showInputDialog("Cuantas horas para cada corrida de SIM 5.12?"));
-        } else {
-            JOptionPane.showMessageDialog(null, "Usando valores predeterminados\nSIM 5.6 -> "
-                    + N_CORRIDAS_5_6 + " Corridas\nSIM 5.12 -> " + N_CORRIDAS_5_12
-                    + " con " + N_HORAS_5_12 + " horas por corrida");
         }
         // Entrada 2
-        JOptionPane.showMessageDialog(null, "Valores predeterminados\nResumen de cada corrida: " + Util.DEBUG + "\nPaso a paso de cada corrida: " + Util.DEBUG2);
-        if (JOptionPane.showConfirmDialog(null, "Desea cambiar que tan descriptiva es la salida?") == JOptionPane.YES_OPTION) {
-            Util.DEBUG = (JOptionPane.showConfirmDialog(null, "Resumen de cada corrida", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
-            Util.DEBUG2 = (JOptionPane.showConfirmDialog(null, "Paso a paso de cada corrida", "", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+        Util.DEBUG2 = false;
+        if (JOptionPane.showConfirmDialog(null, "Valores predeterminados\nResumen de cada corrida: "
+                + Util.DEBUG + "\nPaso a paso de cada corrida: " + Util.DEBUG2
+                + "\nDesea cambiar que tan descriptiva es la salida?", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            Util.DEBUG = (JOptionPane.showConfirmDialog(null, "Resumen de cada corrida", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
+            Util.DEBUG2 = (JOptionPane.showConfirmDialog(null, "Paso a paso de cada corrida", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
         }
         //Simulacion 5.8
         // Llevar registro de lo que sucede
@@ -125,7 +122,7 @@ public class Main {
             System.out.println("[ALERTA] Generando mas numeros");
             N_ALEATORIOS += 100000;
             numeros_aleatorios = Generar.numeros(100000);
-            writeFile();
+            writeFile(100000);
             System.gc();
             return numeros_aleatorios.remove(0);
         } else {
@@ -212,8 +209,8 @@ public class Main {
         }
     }
 
-    private static void writeFile() {
-        String archivo = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".txt";
+    private static void writeFile(int n) {
+        String archivo = "../Numeros-texto-plano/" + n + "_" + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".txt";
         try (PrintWriter pw = new PrintWriter(new FileOutputStream(archivo))) {
             for (Double numero : numeros_aleatorios) {
                 pw.println(numero);

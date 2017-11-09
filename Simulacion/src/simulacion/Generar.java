@@ -40,7 +40,7 @@ public class Generar {
                 nuevo_set.add(r.nextDouble());
             }
         } while (duplicados(nuevo_set));
-        mensaje += "[DUPLICADOS] Luego de " + contador + " intentos se tienen numeros"
+        mensaje += "\n[DUPLICADOS] Luego de " + contador + " intentos se tienen numeros"
                 + " generados por random sin duplicados";
         return nuevo_set;
     }
@@ -195,7 +195,9 @@ public class Generar {
         for (String tipo : fe.keySet()) {
             sum += Math.pow((fo.get(tipo) - fe.get(tipo)), 2) / fe.get(tipo);
         }
-        mensaje += "\n[PRUEBAS] Poker X^2 = " + sum + " < 7.81";
+        if (Util.DEBUG2) {
+            mensaje += "\n[PRUEBAS] Poker X^2 = " + sum + " < 7.81";
+        }
         return sum < 7.81;
     }
 
