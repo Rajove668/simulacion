@@ -25,6 +25,7 @@ public class Generar {
                 + " Numeros pseudo-aleatorios con distrubicion uniforme confirmado";
         if (DEBUG) {
             System.out.println(mensaje);
+            mensaje = "";
         }
         return numeros;
     }
@@ -195,7 +196,7 @@ public class Generar {
             sum += Math.pow((fo.get(tipo) - fe.get(tipo)), 2) / fe.get(tipo);
         }
         mensaje += "\n[PRUEBAS] Poker X^2 = " + sum + " < 7.81";
-        return true;
+        return sum < 7.81;
     }
 
     private static String tipo(String numero) {

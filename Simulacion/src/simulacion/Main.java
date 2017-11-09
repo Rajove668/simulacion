@@ -122,6 +122,7 @@ public class Main {
 
     public static Double un_numero_aleatorio() {
         if (numeros_aleatorios.isEmpty()) {
+            System.out.println("[ALERTA] Generando mas numeros");
             N_ALEATORIOS += 100000;
             numeros_aleatorios = Generar.numeros(100000);
             writeFile();
