@@ -127,10 +127,16 @@ public class Main {
     public static Double un_numero_aleatorio() {
         if (numeros_aleatorios.isEmpty()) {
             System.out.println("[ALERTA] Generando mas numeros");
+            boolean respaldo1 = Util.DEBUG;
+            boolean respaldo2 = Util.DEBUG2;
+            Util.DEBUG = true;
+            Util.DEBUG2 = true;
             N_ALEATORIOS += 100000;
             numeros_aleatorios = Generar.numeros(100000);
             writeFile(100000);
             System.gc();
+            Util.DEBUG = respaldo1;
+            Util.DEBUG2 = respaldo2;
             return numeros_aleatorios.remove(0);
         } else {
             return numeros_aleatorios.remove(0);
