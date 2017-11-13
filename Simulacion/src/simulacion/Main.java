@@ -180,7 +180,7 @@ public class Main {
         }
         if (!fila1_tamaños.isEmpty() && !fila2_tamaños.isEmpty()) {
             SwingUtilities.invokeLater(() -> {
-                Ventana5_12 ventana2 = new Ventana5_12(fila1_tamaños, fila2_tamaños, t_promedio, N_HORAS_5_12);
+                Ventana5_12 ventana2 = new Ventana5_12(fila1_tamaños, fila2_tamaños, t_promedio, N_HORAS_5_12, N_CORRIDAS_5_12);
                 ventana2.setSize(800, 400);
                 ventana2.setLocationRelativeTo(null);
                 ventana2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

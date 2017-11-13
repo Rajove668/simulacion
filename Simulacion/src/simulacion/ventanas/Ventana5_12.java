@@ -12,7 +12,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Ventana5_12 extends javax.swing.JFrame {
 
-    public Ventana5_12(Map<Integer, Float> fila1_tamaños, Map<Integer, Float> fila2_tamaños, Double t_promedio, int N_HORAS) {
+    public Ventana5_12(Map<Integer, Float> fila1_tamaños, Map<Integer, Float> fila2_tamaños, Double t_promedio, int N_HORAS, int N_CORRIDAS_5_12) {
         super("Clientes restantes en fila 1 y 2 despues de " + N_HORAS + "h");
         XYSeriesCollection datos = new XYSeriesCollection();
         XYSeries fila1 = new XYSeries("Fila 1");
@@ -26,7 +26,8 @@ public class Ventana5_12 extends javax.swing.JFrame {
         }
         datos.addSeries(fila2);
         JFreeChart grafica = ChartFactory.createScatterPlot(
-                "Clientes restantes en fila 1 y 2\nTiempo promedio en sistema " + new DecimalFormat("#.##").format(t_promedio) + " min",
+                "Clientes restantes en fila 1 y 2\nTiempo promedio en sistema "
+                + new DecimalFormat("#.##").format(t_promedio) + " min (" + N_CORRIDAS_5_12 + " Corridas)",
                 "# Clientes restantes", "# De veces", datos);
         XYPlot plot = (XYPlot) grafica.getPlot();
         plot.setBackgroundPaint(new Color(255, 228, 196));

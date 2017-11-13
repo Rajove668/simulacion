@@ -25,7 +25,7 @@ public class Ventana5_6 extends javax.swing.JFrame {
         }
         datos.addSeries(politica2);
         JFreeChart grafica = ChartFactory.createScatterPlot(
-                "Costos entre Politica 1 y 2",
+                "Costos entre Politica 1 y 2 (" + N_CORRIDAS_5_6 + " Corridas)",
                 "# De veces", "Costo [$]", datos);
         XYPlot plot = (XYPlot) grafica.getPlot();
         plot.setBackgroundPaint(new Color(255, 228, 196));
