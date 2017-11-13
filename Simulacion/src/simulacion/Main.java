@@ -18,9 +18,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import static simulacion.Generar.duplicados;
 import simulacion.primera.Empresa;
 import simulacion.segunda.Sistema;
+import simulacion.ventanas.Ventana5_12;
+import simulacion.ventanas.Ventana5_6;
 
 public class Main {
 
@@ -108,6 +112,7 @@ public class Main {
             }
             // Saca resultados tiempo promedio
             promedio += sistema.tiempoPromedio();
+            System.gc();
         }
         promedio /= N_CORRIDAS_5_12;
         nuevoTiempo2 = System.nanoTime() - nuevoTiempo;
@@ -115,6 +120,7 @@ public class Main {
         System.out.println("F1 " + fila1_tamaños);
         System.out.println("F2 " + fila2_tamaños);
         System.out.println("T promedio en sistema " + promedio + " min");
+        resultados(costos_P1, costos_P2, N_CORRIDAS_5_6, fila1_tamaños, fila2_tamaños, promedio, N_CORRIDAS_5_12, N_HORAS_5_12);
     }
 
     public static Double un_numero_aleatorio() {
@@ -130,48 +136,82 @@ public class Main {
         }
     }
 
+    public static void writeFile(int n) {
+        String archivo = "../Numeros-texto-plano/" + n + "_" + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".txt";
+        try (PrintWriter pw = new PrintWriter(new FileOutputStream(archivo))) {
+            for (Double numero : numeros_aleatorios) {
+                pw.println(numero);
+            }
+            pw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void resultados(Map<Float, Float> costos_P1, Map<Float, Float> costos_P2, int N_CORRIDAS_5_6, Map<Integer, Float> fila1_tamaños, Map<Integer, Float> fila2_tamaños, Double t_promedio, int N_CORRIDAS_5_12, int N_HORAS_5_12) {
+        if (!costos_P1.isEmpty() && !costos_P2.isEmpty()) {
+//            Por si se quiere ordenado en String
+//            System.out.println("POLITICA 1");
+//            ArrayList<Float> copia_costos = new ArrayList<>(costos_P1.keySet());
+//            Collections.sort(copia_costos);
+//            for (Float costo : copia_costos) {
+//                System.out.println("$" + costo + ": " + costos_P1.get(costo) + " veces");
+//            }
+//            System.out.println("POLITICA 2");
+//            copia_costos = new ArrayList<>(costos_P2.keySet());
+//            Collections.sort(copia_costos);
+//            for (Float costo : copia_costos) {
+//                System.out.println("$" + costo + ": " + costos_P2.get(costo) + " veces");
+//            }
+            SwingUtilities.invokeLater(() -> {
+                Ventana5_6 ventana = new Ventana5_6(costos_P1, costos_P2, N_CORRIDAS_5_6);
+                ventana.setSize(800, 400);
+                ventana.setLocationRelativeTo(null);
+                ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                ventana.setVisible(true);
+            });
+        }
+        if (!fila1_tamaños.isEmpty() && !fila2_tamaños.isEmpty()) {
+            SwingUtilities.invokeLater(() -> {
+                Ventana5_12 ventana2 = new Ventana5_12(fila1_tamaños, fila2_tamaños, t_promedio, N_HORAS_5_12);
+                ventana2.setSize(800, 400);
+                ventana2.setLocationRelativeTo(null);
+                ventana2.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                ventana2.setVisible(true);
+            });
+        }
+    }
+
     public static ArrayList<Double> otra_libreria(int cantidad) {
         tiempoInicio = System.nanoTime();
-
         ArrayList<Double> nuevo_set;
         Random r = Random.getInstance(1234L);
         nuevo_set = new ArrayList<>();
         for (int i = 0; i < cantidad; i++) {
             nuevo_set.add(r.nextDouble());
         }
-
         tiempoEstimado = System.nanoTime() - tiempoInicio;
         System.out.println("Tiempo SET: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
-
         tiempoInicio = System.nanoTime();
-
         System.out.println(duplicados(nuevo_set));
-
         tiempoEstimado = System.nanoTime() - tiempoInicio;
         System.out.println("Tiempo DUPLICADOS: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
-
         return nuevo_set;
     }
 
     public static ArrayList<Double> java(int cantidad) {
         tiempoInicio = System.nanoTime();
-
         ArrayList<Double> nuevo_set = new ArrayList<>();
         java.util.Random r = new java.util.Random();
         for (int i = 0; i < cantidad; i++) {
             nuevo_set.add(r.nextDouble());
         }
-
         tiempoEstimado = System.nanoTime() - tiempoInicio;
         System.out.println("Tiempo SET: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
-
         tiempoInicio = System.nanoTime();
-
         System.out.println(duplicados(nuevo_set));
-
         tiempoEstimado = System.nanoTime() - tiempoInicio;
         System.out.println("Tiempo DUPLICADOS: " + TimeUnit.NANOSECONDS.toMillis(tiempoEstimado) + "ms");
-
         return nuevo_set;
     }
 
@@ -195,28 +235,14 @@ public class Main {
             fis = new FileInputStream(fin);
             //Construct BufferedReader from InputStreamReader
             BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-
             String line = null;
             while ((line = br.readLine()) != null) {
                 lectura.add(Double.parseDouble(line));
             }
-
             br.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private static void writeFile(int n) {
-        String archivo = "../Numeros-texto-plano/" + n + "_" + new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss").format(new Date()) + ".txt";
-        try (PrintWriter pw = new PrintWriter(new FileOutputStream(archivo))) {
-            for (Double numero : numeros_aleatorios) {
-                pw.println(numero);
-            }
-            pw.close();
-        } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
