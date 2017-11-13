@@ -38,6 +38,7 @@ public class Main {
         Util.DEBUG = true;
         Util.DEBUG2 = true;
         numeros_aleatorios = Generar.numeros(N_ALEATORIOS);
+//        readFile1("../Numeros-texto-plano/archivo.txt");
         writeFile(N_ALEATORIOS);
         System.gc();
         int N_CORRIDAS_5_6 = 10;
@@ -245,5 +246,6 @@ public class Main {
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        numeros_aleatorios = lectura;
     }
 }
