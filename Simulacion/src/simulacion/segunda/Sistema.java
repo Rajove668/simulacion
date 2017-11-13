@@ -98,11 +98,7 @@ public class Sistema {
                     fila2.cliente_atendiendo().tiempoAtencion2 -= (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0 - fila2.cliente_atendiendo().tiempoTotal;
                     fila2.cliente_atendiendo().tiempoTotal = (1 + hora - fila2.cliente_atendiendo().horaEntrada) * 60.0;
                     for (int i = 1; i < fila2.size(); i++) {
-                        if (fila2.lista.get(i).tiempoTotal + fila2.cliente_atendiendo().tiempoAtencion2 <= (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0) {
-                            fila2.lista.get(i).tiempoTotal += fila2.cliente_atendiendo().tiempoAtencion2;
-                        } else {
-                            fila2.lista.get(i).tiempoTotal = (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0;
-                        }
+                        fila2.lista.get(i).tiempoTotal = (1 + hora - fila2.lista.get(i).horaEntrada) * 60.0;
                     }
                     break;
                 } else {
@@ -195,10 +191,6 @@ public class Sistema {
 
     @Override
     public String toString() {
-        return "Fila1 " + fila1 + "\nFila2 " + fila2;
-    }
-
-    public String toString2() {
         return "Fila1 " + fila1 + "\nFila2 " + fila2;
     }
 
