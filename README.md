@@ -88,6 +88,6 @@ T promedio en sistema 49.61755134513993 min
 
 ![5-12](10_Corridas_5_12.jpg)
 
-## TO DO
+## Video
 
-- [ ] Presentacion
+[![Video](https://img.youtube.com/vi/y_xXmtc5Oy8/maxresdefault.jpg)](https://youtu.be/y_xXmtc5Oy8)
