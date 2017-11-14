@@ -61,7 +61,7 @@ public class Main {
             Util.DEBUG = (JOptionPane.showConfirmDialog(null, "Resumen de cada corrida", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
             Util.DEBUG2 = (JOptionPane.showConfirmDialog(null, "Paso a paso de cada corrida", "Mensaje", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION);
         }
-        //Simulacion 5.8
+        //Simulacion 5.6
         // Llevar registro de lo que sucede
         Map<Float, Float> costos_P1 = new HashMap<>();
         Map<Float, Float> costos_P2 = new HashMap<>();
